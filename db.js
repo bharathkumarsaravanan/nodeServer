@@ -15,12 +15,19 @@ const knex = require('knex')({
 });
 
 // db.run('CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING)')
+// db.run('ALTER TABLE users ADD column role String')
 
-// knex.insert({
-//     name:'bharath'
+// knex.update({
+//     role:'super agent'
 // }).into('users')
+// .where('id',1)
 // .then()
 
 // knex('users')
-// .select('*')
-// .then((e) => console.log(e))
+// .del()
+// .whereIn('id', [2,3])
+// .then(e => console.log(e))
+
+knex('users')
+.select('*')
+.then((e) => console.log(e))
