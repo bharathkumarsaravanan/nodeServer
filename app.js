@@ -24,11 +24,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json());
 app.use(cors());
 
-app.get('/home',function(req,res){
-    knex('users')
-    .select('*')
-    .then((e) => res.send(e))
-})
+app.use(require('./booking'))
 
 app.listen(9000,function(){
     console.log('localhost:9000')

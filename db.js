@@ -14,18 +14,25 @@ const knex = require('knex')({
     useNullAsDefault: true
 });
 
-// db.run('CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING)')
-// db.run('ALTER TABLE users ADD column role String')
+// db.run('CREATE TABLE rowcount (id INTEGER PRIMARY KEY AUTOINCREMENT, count int)')
+// db.run('CREATE TABLE passengers (id INTEGER PRIMARY KEY AUTOINCREMENT, name String, age int, gender String)')
+// db.run('ALTER TABLE passengers ADD column seat int')
+// db.run('ALTER TABLE passengers ADD column agendId int')
+// db.run('ALTER TABLE users ADD column phone int')
+// db.run('ALTER TABLE passengers RENAME column agendId to agentId ')
 
 // knex.update({
-//     role:'super agent'
+//     mail:'bharathsaravananofficial@gmail.com'
 // }).into('users')
 // .where('id',1)
 // .then()
-
+// knex.insert({
+//     count:0
+// }).into('rowcount')
+// .then()
 // knex('users')
 // .del()
-// .whereIn('id', [2,3])
+// .where('id', 5)
 // .then(e => console.log(e))
 
 knex('users')
