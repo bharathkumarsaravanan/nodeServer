@@ -32,6 +32,18 @@ app.use(cors(corsOptions));
 
 app.use(require('./booking'))
 
+app.use((req, res, next) => {
+    const corsWhitelist = [
+        'https://ticketbookingapp.vercel.app'
+    ];
+    if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    }
+
+    next();
+});
+
 app.listen(9000,function(){
     console.log('localhost:9000')
 });

@@ -17,9 +17,9 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 const corsOptions ={
-    origin:'https://ticketbookingapp.vercel.app/signup', 
+    origin:'https://ticketbookingapp.vercel.app', 
     credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
+    optionSuccessStatus:200,
 }
 app.use(cors(corsOptions));
 app.use('/static', express.static(path.join(__dirname, 'public')))
@@ -29,6 +29,18 @@ const knex = require('knex')({
         filename: './data.db'
     },
     useNullAsDefault: true
+});
+
+app.use((req, res, next) => {
+    const corsWhitelist = [
+        'https://ticketbookingapp.vercel.app'
+    ];
+    if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    }
+
+    next();
 });
 
 router.use(function timeLog(req,res,next){
