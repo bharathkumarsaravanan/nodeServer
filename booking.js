@@ -45,7 +45,7 @@ const knex = require('knex')({
 
   app.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTION');
     res.append('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
@@ -252,11 +252,15 @@ router.post('/home/agents/:userid/delete', function(req,res){
     //   "Origin, X-Requested-With, Content-Type, Accept"
     // );
     var userId = req.params.userid;
+    console.log(userId)
 
     knex('users')
     .del()
     .where('id', userId)
-    .then(() => res.send({message: 'Agent deleted successfully!'}))
+    .then(() => {
+        console.log('fun out')
+        res.send({message: 'Agent deleted successfully!'})   
+    })
 })
 
 router.get('/home/superagent/rowcount', function(req,res){
