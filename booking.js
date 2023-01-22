@@ -32,36 +32,43 @@ const knex = require('knex')({
 });
 
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Origin, X-Requested-With, Content-Type, Accept"
+//     );
+//     next();
+//   });
+
+  app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
     next();
-  });
+});
 
 router.use(function timeLog(req,res,next){
     next();
 });
 
 router.get('/home',function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     knex('users')
     .select('*')
     .then((e) => res.send(e))
 })
 
 router.post('/home', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     // console.log(req.body);
     var body = req.body;
     knex('users')
@@ -86,11 +93,11 @@ router.post('/home', function(req,res){
 })
 
 router.post('/home/superagent/signup', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
 
     var body = req.body;
     knex('users')
@@ -112,11 +119,11 @@ router.post('/home/superagent/signup', function(req,res){
 })
 
 router.post('/home/agent/signup', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var body = req.body;
     knex('users')
     .select('*')
@@ -142,11 +149,11 @@ router.post('/home/agent/signup', function(req,res){
 })
 
 router.get('/home/agents', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     knex('users')
     .select('*')
     .where('role', 'agent')
@@ -154,11 +161,11 @@ router.get('/home/agents', function(req,res){
 })
 
 router.get('/home/user/:user', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var userId = req.params.user 
   
     knex('users')
@@ -168,11 +175,11 @@ router.get('/home/user/:user', function(req,res){
 })
 
 router.post('/agent/login', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var body = req.body;
     knex('users')
     .select('*')
@@ -196,11 +203,11 @@ router.post('/agent/login', function(req,res){
 })
 
 router.post('/agent/:user/form', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var agentId = req.params.user;
     var body = req.body;
     knex('users')
@@ -209,11 +216,11 @@ router.post('/agent/:user/form', function(req,res){
     .then(() => res.send({message:"updated"}))
 })
 router.post('/agent/:user/form/profile',uploadProfile.single('profile'), function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var agentId = req.params.user;
     console.log(req.file);
     var profile = req.file;
@@ -237,11 +244,11 @@ router.post('/agent/:user/form/profile',uploadProfile.single('profile'), functio
 })
 
 router.post('/home/agents/:userid/delete', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var userId = req.params.userid;
 
     knex('users')
@@ -251,11 +258,11 @@ router.post('/home/agents/:userid/delete', function(req,res){
 })
 
 router.get('/home/superagent/rowcount', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
 
     knex('rowcount')
     .select('*')
@@ -264,11 +271,11 @@ router.get('/home/superagent/rowcount', function(req,res){
 })
 
 router.post('/home/superagent/rowcount', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var body = req.body;
 
     knex('rowcount')
@@ -277,11 +284,11 @@ router.post('/home/superagent/rowcount', function(req,res){
 })
 
 router.get('/home/agent/:user/passengers', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var agentId = req.params.user;
 
     knex('passengers')
@@ -292,11 +299,11 @@ router.get('/home/agent/:user/passengers', function(req,res){
 
 
 router.post('/home/agent/:user/passengers', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var agentId = req.params.user;
     var body = req.body;
 
@@ -314,11 +321,11 @@ router.post('/home/agent/:user/passengers', function(req,res){
 })
 
 router.post('/home/agent/passengers/delete', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var body = req.body[0];
 
     knex('passengers')
@@ -328,11 +335,11 @@ router.post('/home/agent/passengers/delete', function(req,res){
 });
 
 router.post('/home/agent/:user/booking/:id', function(req,res){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     var id = req.params.id;
     var body = req.body;
     var agentId = req.params.user;
