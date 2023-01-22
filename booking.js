@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
+const fs = require('fs')
 
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -8,10 +9,14 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database(path.resolve(__dirname,'./data.db'));
 
+const multer = require('multer');
+const uploadProfile = multer({dest: 'public/profile'})
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 
+app.use('/static', express.static(path.join(__dirname, 'public')))
 const knex = require('knex')({
     client:'sqlite3',
     connection:{
@@ -106,6 +111,15 @@ router.get('/home/agents', function(req,res){
     .then(datas => res.send({agents: datas}))
 })
 
+router.get('/home/user/:user', function(req,res){
+    var userId = req.params.user 
+  
+    knex('users')
+    .select('*')
+    .where('id', userId)
+    .then(data => res.send({agent: data}))
+})
+
 router.post('/agent/login', function(req,res){
     var body = req.body;
     knex('users')
@@ -116,7 +130,7 @@ router.post('/agent/login', function(req,res){
         if(data.length !== 0){
 
             if(data[0].password == body.password){
-                res.send({login: true, user: data})
+                res.send({login: true, user: data[0]})
             }
             else{
 
@@ -127,6 +141,37 @@ router.post('/agent/login', function(req,res){
             res.send({login: false})
         }
     })
+})
+
+router.post('/agent/:user/form', function(req,res){
+    var agentId = req.params.user;
+    var body = req.body;
+    knex('users')
+    .update(body)
+    .where('id', agentId)
+    .then(() => res.send({message:"updated"}))
+})
+router.post('/agent/:user/form/profile',uploadProfile.single('profile'), function(req,res){
+    var agentId = req.params.user;
+    console.log(req.file);
+    var profile = req.file;
+
+    var ext = path.extname(profile.originalname)
+    var newName = agentId+ext;
+    var newPath = path.join('public','profile',newName)
+    console.log(newPath)
+    fs.renameSync(profile.path,newPath,function(err){
+        if(err){
+            console.log(err);
+        }
+    })
+    knex('users')
+    .update({
+        profile: newName
+    })
+    .where('id', agentId)
+    .then(() => res.send({message:'profile updated'}))
+
 })
 
 router.post('/home/agents/:userid/delete', function(req,res){
