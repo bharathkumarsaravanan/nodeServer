@@ -16,12 +16,12 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({
     extended: true
 }))
-const corsOptions ={
-    origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200,
-}
-app.use(cors(corsOptions));
+// const corsOptions ={
+//     origin:'*', 
+//     credentials:true,               //access-control-allow-credentials:true
+//     optionSuccessStatus:200,
+// }
+app.use(cors());
 
 app.use('/static', express.static(path.join(__dirname, 'public')))
 const knex = require('knex')({
