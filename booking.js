@@ -17,19 +17,21 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 const corsOptions ={
-    origin:'*', 
+    origin:true, 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
 }
 app.use(cors(corsOptions));
-app.use('/static', express.static(path.join(__dirname, 'public')))
-const knex = require('knex')({
-    client:'sqlite3',
-    connection:{
-        filename: './data.db'
-    },
-    useNullAsDefault: true
-});
+v
+// app.use('/static', express.static(path.join(__dirname, 'public')))
+// const knex = require('knex')({
+//     client:'sqlite3',
+//     connection:{
+//         filename: './data.db'
+//     },
+//     useNullAsDefault: true
+// });
+
 
 
 // app.use((req, res, next) => {
