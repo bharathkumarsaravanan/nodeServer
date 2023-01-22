@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 const corsOptions ={
-    origin:'https://ticketbookingapp.vercel.app', 
+    origin:'*', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
 }
@@ -33,7 +33,7 @@ const knex = require('knex')({
 
 
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://ticketbookingapp.vercel.app");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
