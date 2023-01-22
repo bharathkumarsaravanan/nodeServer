@@ -20,7 +20,6 @@ const knex = require('knex')({
 });
 
 const corsOptions ={
-    origin:'https://ticketbookingapp.vercel.app/', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
