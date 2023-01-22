@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 const corsOptions ={
-    origin:'https://ticketbookingapp.vercel.app', 
+    origin:'https://ticketbookingapp.vercel.app/signup', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
