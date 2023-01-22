@@ -22,7 +22,7 @@ const corsOptions ={
     optionSuccessStatus:200,
 }
 app.use(cors(corsOptions));
-v
+
 // app.use('/static', express.static(path.join(__dirname, 'public')))
 // const knex = require('knex')({
 //     client:'sqlite3',
