@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 const corsOptions ={
-    origin:true, 
+    origin:'*', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
 }
