@@ -16,7 +16,12 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({
     extended: true
 }))
-app.use(cors());
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 app.use('/static', express.static(path.join(__dirname, 'public')))
 const knex = require('knex')({
     client:'sqlite3',
