@@ -23,14 +23,14 @@ const corsOptions ={
 }
 app.use(cors(corsOptions));
 
-// app.use('/static', express.static(path.join(__dirname, 'public')))
-// const knex = require('knex')({
-//     client:'sqlite3',
-//     connection:{
-//         filename: './data.db'
-//     },
-//     useNullAsDefault: true
-// });
+app.use('/static', express.static(path.join(__dirname, 'public')))
+const knex = require('knex')({
+    client:'sqlite3',
+    connection:{
+        filename: './data.db'
+    },
+    useNullAsDefault: true
+});
 
 
 

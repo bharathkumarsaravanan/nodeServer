@@ -20,7 +20,7 @@ const knex = require('knex')({
 });
 
 const corsOptions ={
-    origin:'*', 
+    origin:'', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
