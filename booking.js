@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const fs = require('fs')
+const cors = require('cors');
 
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -15,7 +16,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({
     extended: true
 }))
-
+app.use(cors());
 app.use('/static', express.static(path.join(__dirname, 'public')))
 const knex = require('knex')({
     client:'sqlite3',
